@@ -10,6 +10,10 @@ $ gem install chef
 ```
 $ knife cookbook create <cookbook-name>
 ```
+-oオプションでディレクトリ内に作れる：
+```
+knife cookbook create <cookbook-name> -o <output-directory>
+```
 ### delete?
 ```
 $ knife cookbook delete <cookbook-name> -z
