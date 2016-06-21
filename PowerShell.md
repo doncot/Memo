@@ -30,3 +30,6 @@ Configuration HelloPowerShellDSC
 HelloPowerShellDSC -OutputPath .
 Start-DscConfiguration .\HelloPowerShellDSC -Wait -Verbose
 ```
+
+## 参考
+* [PowerShell DSCで導入された新しい構文キーワード](http://www.buildinsider.net/enterprise/powershelldsc/01)
