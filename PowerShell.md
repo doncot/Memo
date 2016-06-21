@@ -8,7 +8,7 @@ Set-ExecutionPolicy RemoteSigned
 Enable-PSRemoting
 ```
 
-## 例
+## 例（全部）
 ### hello world
 ```powershell
 Configuration HelloPowerShellDSC
