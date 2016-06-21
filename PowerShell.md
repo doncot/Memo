@@ -1,16 +1,16 @@
 ## 準備
 ### スクリプト実行許可
-```
+```powershell
 Set-ExecutionPolicy RemoteSigned 
 ```
 ### リモート操作を有効に
-```
+```powershell
 Enable-PSRemoting
 ```
 
 ## 例
 ### hello world
-```
+```powershell
 Configuration HelloPowerShellDSC
 {
     Import-DscResource -ModuleName PSDesiredStateConfiguration
