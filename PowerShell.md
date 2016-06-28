@@ -8,6 +8,17 @@ Set-ExecutionPolicy RemoteSigned
 Enable-PSRemoting
 ```
 
+### モジュールの検証
+インストールせずに、ローカルに落として使えるようにする
+```powershell
+Save-Module -Name <module> -Path <path> 
+```
+
+### モジュールのインストール
+```powershell
+Install-Module -Name <module>
+```
+
 ## 例（全部）
 ### hello world
 ```powershell
@@ -29,6 +40,31 @@ Configuration HelloPowerShellDSC
 
 HelloPowerShellDSC -OutputPath .
 Start-DscConfiguration .\HelloPowerShellDSC -Wait -Verbose
+```
+
+## 例（部分）
+### ファイアウォール
+
+Ping受信ルール
+
+```powershell
+Import-DSCResource -ModuleName xNetworking
+
+Node localhost
+{ 
+    xFirewall Firewall
+    { 
+        Name = "MyFirewallRule" 
+        DisplayName = "ファイルとプリンターの共有 (エコー要求 - ICMPv4 受信)" 
+        Group = "ファイルとプリンターの共有"
+        Ensure = "Present"
+        Action = "Allow"
+        Enabled = "True"
+        Direction = "Inbound"
+        Profile = "Domain"
+        Protocol = "TCP"
+    }
+} 
 ```
 
 ## 参考
