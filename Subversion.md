@@ -1,13 +1,14 @@
 ## Subversionメモ
 
-### 無視リスト（コマンド）
+### 無視リスト
+#### 無視リスト（コマンド）
 ```bash
 $ svn propset svn:ignore -R *.class .
 ```
 
 -R でサブディレクトリも見る。
 
-### 無視リスト (ファイル)
+#### 無視リスト (ファイル)
 以下の内容で.svnignoreを作成
 
 ```
@@ -18,6 +19,12 @@ $ svn propset svn:ignore -R *.class .
 
 ```bash
 $ svn propset svn:ignore -R -F .svnignore .
+```
+
+#### 無視リストを表示
+プロパティを全表示。無視リスト以外も表示される。
+```bash
+$ svn proplist -v [PATH]
 ```
 
 ### 参考
