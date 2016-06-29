@@ -1,6 +1,8 @@
 ## Subversionメモ
 
 ### 無視リスト
+注意：無視リストを使うときは'svn add --force .'を使う（明示的にファイルを追加した場合、svn:ignoreプロパティは無視される）。
+
 #### 無視リスト（コマンド）
 ```bash
 $ svn propset svn:ignore -R *.class .
@@ -71,6 +73,11 @@ $ svn propset svn:ignore -R -F .svnignore .
 プロパティを全表示。無視リスト以外も表示される。
 ```bash
 $ svn proplist -v [PATH]
+```
+
+#### 無視されたファイルを確認
+```bash
+$ svn status --no-ignore
 ```
 
 ### 参考
