@@ -21,4 +21,4 @@ $ svn propset svn:ignore -R -F .svnignore .
 ```
 
 ### 参考
-* [http://superchlorine.com/2013/08/getting-svn-to-ignore-files-and-directories/](Getting svn to ignore files and directories)
+* [Getting svn to ignore files and directories](http://superchlorine.com/2013/08/getting-svn-to-ignore-files-and-directories/)
