@@ -117,3 +117,18 @@ void CMyView::SetDCPixelFormat(HDC hdc)
     }
 }
 ```
+
+### OnDraw
+
+```cpp
+void CLicView::OnDraw(CDC* /*pDC*/)
+{
+	CLicDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+
+	// TODO: この場所にネイティブ データ用の描画コードを追加します。
+	SwapBuffers(m_pDC->m_hDC);
+}
+```
