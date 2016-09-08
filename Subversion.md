@@ -95,7 +95,7 @@ $ svn status --no-ignore
 #### 自分のみを追加
 ```bash
 svn add --depth=empty
-```bash
+```
 
 
 ### 参考
