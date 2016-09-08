@@ -92,5 +92,10 @@ $ svn proplist -v [PATH]
 $ svn status --no-ignore
 ```
 
+#### 自分のみを追加
+```bash
+svn add --depth=empty
+```bash
+
 ### 参考
 * [Getting svn to ignore files and directories](http://superchlorine.com/2013/08/getting-svn-to-ignore-files-and-directories/)
