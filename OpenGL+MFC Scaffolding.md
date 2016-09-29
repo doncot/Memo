@@ -17,13 +17,16 @@ OpenGL+MFCでネイティブ描画に最低限必要なコード。
 ## CMyView.h
 
 ```cpp
-afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
-afx_msg void OnSize(UINT nType, int cx, int cy);
+private:
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 
-///ClientDC
-std::shared_ptr<CDC> m_pDC;
-///rendering context
-HGLRC m_hGlRC;
+	void SetDCPixelFormat(HDC hdc);
+
+	///ClientDC
+	std::shared_ptr<CDC> m_pDC;
+	///rendering context
+	HGLRC m_hGlRC;
 ```
 
 ## CMyView.cpp
@@ -109,12 +112,12 @@ void CMyView::SetDCPixelFormat(HDC hdc)
 	//実際のDCにピクセルフォーマットを設定する
     if(!SetPixelFormat(hdc, pixelFormatIndex, &pfd))
 	{
-		throw runtime_error("Failed to set pixel format");
+		throw std::runtime_error("Failed to set pixel format");
     }
 
     if(DescribePixelFormat(hdc, pixelFormatIndex, sizeof(PIXELFORMATDESCRIPTOR), &pfd) == 0)
 	{
-		throw runtime_error("the device context's pixel format is invalid");
+		throw std::runtime_error("the device context's pixel format is invalid");
     }
 }
 ```
