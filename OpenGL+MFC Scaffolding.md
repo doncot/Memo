@@ -9,6 +9,7 @@ OpenGL+MFCでネイティブ描画に最低限必要なコード。
 #include<gl\GL.h>
 #include<gl\GLU.h>
 
+//絶対必須ではないが、下の部分で使う
 #include<memory>
 #include<stdexcept>
 ```
