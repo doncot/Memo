@@ -46,7 +46,7 @@ int CMyView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		glClearColor(0.0f, 0.2f, 0.4f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
-	catch(const exception& e)
+	catch(const std::exception& e)
 	{
 		CString value(e.what());
 		::AfxMessageBox(value, MB_OK | MB_ICONERROR);
