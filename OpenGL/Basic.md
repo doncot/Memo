@@ -155,4 +155,4 @@ void main()
 | 用語 | 正式 | 説明 |
 | --- | --- | --- |
 | VBO | **V**ertex **B**uffer **O**bjects | 頂点をVRAM格納するバッファ |
-| VAO | **V**ertex **A**rray **O**bject | aboを配列にしたもの | 属性（アトリビュート）とVBOの結びつきを保存できるバッファ |
+| VAO | **V**ertex **A**rray **O**bject | 属性（アトリビュート）とVBOの結びつきを保存できるバッファ |
