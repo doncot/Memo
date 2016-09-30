@@ -22,4 +22,6 @@
 ## FS
 
 # 用語
-| VBO | *V*ertex *B*uffer *O*bjects | 頂点をVRAM格納するバッファ |
+| 用語 | 正式 | 説明 |
+| --- | --- | --- |
+| VBO | **V**ertex **B**uffer **O**bjects | 頂点をVRAM格納するバッファ |
