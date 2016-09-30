@@ -112,6 +112,10 @@ glBindVertexArray(0);
 
 ## 描画
 ```cpp
+glClearColor(0.0f, 0.2f, 0.4f, 1.0f);
+glClear(GL_COLOR_BUFFER_BIT);
+//デプステストを入れると描画されない。
+
 glUseProgram(shaderProgram);
 glBindVertexArray(VAO);
 glDrawArrays(GL_TRIANGLES, 0, 3);
