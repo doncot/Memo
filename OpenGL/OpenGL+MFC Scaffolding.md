@@ -35,6 +35,7 @@ private:
 BEGIN_MESSAGE_MAP(CRendererView, CView)
 	//ここを追加
 	ON_WM_CREATE()
+	ON_WM_SIZE()
 END_MESSAGE_MAP()
 ```
 
