@@ -81,7 +81,7 @@ glGenBuffers(1, &vbo);
 glBindBuffer(GL_ARRAY_BUFFER, vbo);
 glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-GLint positionLocation = glGetAttribLocation(m_basicLightingShader, "position");
+GLint positionLocation = glGetAttribLocation(shaderProgram, "position");
 glEnableVertexAttribArray(positionLocation);
 glVertexAttribPointer(positionLocation, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat), (GLubyte*)nullptr);
 
