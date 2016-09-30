@@ -2,6 +2,25 @@
 　基本的なコード。
 
 # コード
+## GLEW
+### 宣言
+```cpp
+#define GLEW_STATIC
+#include"gl/glew.h"
+#pragma comment(lib, "glew32s.lib")
+#pragma comment(lib, "OpenGL32.lib")
+```
+### 実装
+```cpp
+//glew
+glewExperimental = GL_TRUE;
+if (glewInit() != GLEW_OK)
+{
+	throw std::runtime_error("Failed to initialize GLEW");
+}
+
+```
+
 ## オブジェクトの作成
 1個のオブジェクト、1つのシェーダーの組を生成する場合。
 
