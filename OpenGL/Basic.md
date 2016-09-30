@@ -3,7 +3,6 @@
 
 # オブジェクトの作成
 ```cpp
-	//VAO(vertex array object)。aboを配列にしたもの
 	glGenVertexArrays(3, m_VAOs); //第一引数でVAOの要素数を指定
 	//VAOをバインド、以下VAOにバインドしたいオブジェクトが続く
 	glBindVertexArray(m_VAOs[VAO_Index::Cube]);
@@ -25,3 +24,4 @@
 | 用語 | 正式 | 説明 |
 | --- | --- | --- |
 | VBO | **V**ertex **B**uffer **O**bjects | 頂点をVRAM格納するバッファ |
+| VAO | **V**ertex **A**rray **O**bject | aboを配列にしたもの | 属性（アトリビュート）とVBOの結びつきを保存できるバッファ |
