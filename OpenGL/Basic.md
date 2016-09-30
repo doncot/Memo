@@ -2,19 +2,75 @@
 　基本的なコード。
 
 # オブジェクトの作成
-1個のオブジェクトを生成。
+1個のオブジェクト、1つのシェーダーの組を生成する場合。
 
+## 宣言
 ```cpp
-//宣言
 GLuint vao;
 GLuint vbo;
+
 GLfloat vertices[] = {
 -0.5f, -0.5f, 0.0f,
  0.5f, -0.5f, 0.0f,
  0.0f,  0.5f, 0.0f
-};  
+}; 
 
-//実装
+GLuint shaderProgram;
+```
+
+## 実装
+```cpp
+//シェーダー準備
+//VS
+GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+glCompileShader(vertexShader);
+{
+	GLint success;
+	GLchar infoLog[512];
+	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+	if(!success)
+	{
+		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+	}
+}
+//FS
+GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+glCompileShader(fragmentShader);
+{
+	GLint success;
+	GLchar infoLog[512];
+	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+	if(!success)
+	{
+		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
+	}
+}
+//Program
+shaderProgram = glCreateProgram();
+glAttachShader(shaderProgram, vertexShader);
+glAttachShader(shaderProgram, fragmentShader);
+glLinkProgram(shaderProgram);
+{
+	GLint success;
+	GLchar infoLog[512];
+	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+	if(!success)
+	{
+		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
+	}
+}
+//もう使わない
+glDeleteShader(vertexShader);
+glDeleteShader(fragmentShader); 
+
+glUseProgram(shaderProgram);
+
+//モデルをバッファに詰める
 //VAO
 glGenVertexArrays(1, &vao); //第一引数でVAOの要素数を指定
 //VAOをバインド、以下VAOにバインドしたいオブジェクトの属性が続く
@@ -24,6 +80,13 @@ glGenBuffers(1, &vbo);
 glBindBuffer(GL_ARRAY_BUFFER, vbo);
 glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
+GLint positionLocation = glGetAttribLocation(m_basicLightingShader, "position");
+glEnableVertexAttribArray(positionLocation);
+glVertexAttribPointer(positionLocation, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat), (GLubyte*)nullptr);
+
+//バインド解除
+glBindBuffer(GL_ARRAY_BUFFER, 0);
+glBindVertexArray(0);
 
 ```
 
