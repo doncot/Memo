@@ -1,10 +1,11 @@
 # 概要
 　基本的なコード。
 
-# オブジェクトの作成
+# コード
+## オブジェクトの作成
 1個のオブジェクト、1つのシェーダーの組を生成する場合。
 
-## 宣言
+### 宣言
 ```cpp
 GLuint vao;
 GLuint vbo;
@@ -18,7 +19,7 @@ GLfloat vertices[] = {
 GLuint shaderProgram;
 ```
 
-## 実装
+### 実装
 ```cpp
 //シェーダー準備
 //VS
@@ -90,6 +91,13 @@ glBindVertexArray(0);
 
 ```
 
+## 描画
+```cpp
+glUseProgram(shaderProgram);
+glBindVertexArray(VAO);
+glDrawArrays(GL_TRIANGLES, 0, 3);
+glBindVertexArray(0);  
+```
 
 # シェーダー
 ## 頂点シェーダー
