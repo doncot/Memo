@@ -4,7 +4,19 @@
 ### 指定したリビジョンの変更点を見る
 r42の変更点をみる
 ```bash
-svn log --verbose -r 42
+$ svn log --verbose -r 42
+```
+
+### diffに色をつける
+1. colordiffをインストール
+```bash
+$ sudo apt-get install colordiff
+```
+
+2. svnのdiffエディタに指定する
+```config
+# ~/.subversion/config
+diff-cmd = colordiff
 ```
 
 ## 過去に戻る
@@ -15,14 +27,14 @@ $ svn revert -R .
 
 ### 過去のリビジョンに戻る
 ```bash
-svn update -r 9
+$ svn update -r 9
 ```
 これでリビジョン9に戻る。
 
 or
 
 ```bash
-svn merge -c -666 .
+$ svn merge -c -666 .
 ```
 リビジョン666をリバートする。
 
@@ -108,7 +120,7 @@ $ svn status --no-ignore
 
 ### 自分のみを追加
 ```bash
-svn add --depth=empty
+$ svn add --depth=empty
 ```
 
 
