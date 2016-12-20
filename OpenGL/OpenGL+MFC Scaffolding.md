@@ -147,8 +147,118 @@ void CLicView::OnDraw(CDC* /*pDC*/)
 1. [公式](http://glew.sourceforge.net/)からとってくる。
 2. IncludeとLibのパスを通す。
 3. glew32s.libを追加する。
+4. glewの初期化コードを追加。
 
+```cpp
+//GLEW初期化コード
+glewExperimental = GL_TRUE;
+if (glewInit() != GLEW_OK)
+{
+	throw std::runtime_error("Failed to initialize GLEW");
+}
+```
 
+### リソースの宣言
+ヘッダー辺りに
+
+```cpp
+GLuint shaderProgram;
+GLuint vbo;
+GLuint vao;
+```
+
+### 三角形リソース構築
+
+```cpp
+GLfloat vertices[] = {
+	-0.5f, -0.5f, 0.0f,
+	0.5f, -0.5f, 0.0f,
+	0.0f,  0.5f, 0.0f
+};
+glGenVertexArrays(1, &vao);
+glGenBuffers(1, &vbo);
+glBindVertexArray(vao);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+		glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+glBindVertexArray(0);
+```
+
+### シェーダー構築
+
+``cpp
+GLuint CreateShader(const GLchar * vsSource, const GLchar * fsSource)
+{
+	const size_t BuffSize = 8192;
+
+	//VS
+	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(vertexShader, 1, &vsSource, NULL);
+	glCompileShader(vertexShader);
+	{
+		GLint success;
+		GLchar infoLog[BuffSize] = "";
+		glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+		if (!success)
+		{
+			glGetShaderInfoLog(vertexShader, BuffSize, NULL, infoLog);
+			throw std::runtime_error(std::string("ERROR::SHADER::VERTEX::COMPILATION_FAILED\n") + std::string(infoLog));
+		}
+	}
+
+	//FS
+	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(fragmentShader, 1, &fsSource, NULL);
+	glCompileShader(fragmentShader);
+	{
+		GLint success;
+		GLchar infoLog[BuffSize] = "";
+		glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+		if (!success)
+		{
+			glGetShaderInfoLog(fragmentShader, BuffSize, NULL, infoLog);
+			throw std::runtime_error(std::string("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n") + std::string(infoLog));
+		}
+	}
+
+	//Program
+	GLuint shader = glCreateProgram();
+	glAttachShader(shader, vertexShader);
+	glAttachShader(shader, fragmentShader);
+	glLinkProgram(shader);
+	{
+		GLint success;
+		GLchar infoLog[BuffSize] = "";
+		glGetProgramiv(shader, GL_LINK_STATUS, &success);
+		if (!success)
+		{
+			glGetProgramInfoLog(shader, BuffSize, NULL, infoLog);
+			throw std::runtime_error("ERROR::SHADER::PROGRAM::LINKING_FAILED" + std::string(infoLog));
+		}
+	}
+	//もう使わない
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
+
+	return shader;
+}
+```
+* おまけ―テキストファイル読み込み
+
+```cpp
+#include<fstream>
+#include<string>
+
+std::ifstream vsfile("basic.vert");
+std::string vsSource;
+std::string buff;
+while (std::getline(vsfile, buff))
+{
+	vsSource += buff + std::string("\n");
+}
+```
 
 ### 頂点シェーダー
 
