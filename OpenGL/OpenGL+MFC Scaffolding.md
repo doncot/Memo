@@ -143,7 +143,6 @@ void CLicView::OnDraw(CDC* /*pDC*/)
 ## 実装（三角形の描画まで）
 
 ### GLEW
-
 1. [公式](http://glew.sourceforge.net/)からとってくる。
 2. IncludeとLibのパスを通す。
 3. glew32s.libを追加する。
@@ -168,7 +167,6 @@ GLuint vao;
 ```
 
 ### 三角形リソース構築
-
 ```cpp
 GLfloat vertices[] = {
 	-0.5f, -0.5f, 0.0f,
@@ -187,7 +185,6 @@ glBindVertexArray(0);
 ```
 
 ### シェーダー構築
-
 ```cpp
 GLuint CreateShader(const GLchar * vsSource, const GLchar * fsSource)
 {
@@ -262,7 +259,6 @@ while (std::getline(vsfile, buff))
 ```
 
 ### 頂点シェーダー
-
 ```glsl
 #version 330 core
   
@@ -275,7 +271,6 @@ void main()
 ```
 
 ### フラグメントシェーダー
-
 ```glsl
 #version 330 core
 
@@ -288,10 +283,16 @@ void main()
 ```
 
 ### 描画
-
 ```cpp
 glUseProgram(shaderProgram);
 glBindVertexArray(vao);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 glBindVertexArray(0);
+```
+
+### リソース撤去
+```cpp
+glDeleteVertexArrays(1, &vao);
+glDeleteBuffers(1, &vbo);
+glDeleteProgram(shaderProgram);
 ```
