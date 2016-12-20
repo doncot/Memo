@@ -188,7 +188,7 @@ glBindVertexArray(0);
 
 ### シェーダー構築
 
-``cpp
+```cpp
 GLuint CreateShader(const GLchar * vsSource, const GLchar * fsSource)
 {
 	const size_t BuffSize = 8192;
@@ -245,7 +245,8 @@ GLuint CreateShader(const GLchar * vsSource, const GLchar * fsSource)
 	return shader;
 }
 ```
-* おまけ―テキストファイル読み込み
+
+おまけ―テキストファイル読み込み
 
 ```cpp
 #include<fstream>
@@ -284,4 +285,13 @@ void main()
 {
     color = vec4(1.0f, 0.5f, 0.2f, 1.0f);
 }
+```
+
+### 描画
+
+```cpp
+glUseProgram(shaderProgram);
+glBindVertexArray(vao);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+glBindVertexArray(0);
 ```
