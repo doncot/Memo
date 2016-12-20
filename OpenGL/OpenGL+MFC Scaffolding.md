@@ -1,7 +1,7 @@
 # 概要
 OpenGL+MFCでネイティブ描画に最低限必要なコード。
 
-# 実装
+# 実装（最低限）
 ## どっかのヘッダー
 
 ```cpp
@@ -137,5 +137,41 @@ void CLicView::OnDraw(CDC* /*pDC*/)
 
 	// TODO: この場所にネイティブ データ用の描画コードを追加します。
 	SwapBuffers(m_pDC->m_hDC);
+}
+```
+
+## 実装（三角形の描画まで）
+
+### GLEW
+
+1. [公式](http://glew.sourceforge.net/)からとってくる。
+2. IncludeとLibのパスを通す。
+3. glew32s.libを追加する。
+
+
+
+### 頂点シェーダー
+
+```glsl
+#version 330 core
+  
+layout (location = 0) in vec3 position;
+
+void main()
+{
+    gl_Position = vec4(position.x, position.y, position.z, 1.0);
+}
+```
+
+### フラグメントシェーダー
+
+```glsl
+#version 330 core
+
+out vec4 color;
+
+void main()
+{
+    color = vec4(1.0f, 0.5f, 0.2f, 1.0f);
 }
 ```
