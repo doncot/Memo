@@ -41,6 +41,12 @@ $ svn merge -c -666 .
 ## 無視リスト
 注意：無視リストを使うときは'svn add --force .'を使う（明示的にファイルを追加した場合、svn:ignoreプロパティは無視される）。
 
+### 無視リストをエディターで編集
+```bash
+$ EDITOR=vi svn propedit svn:ignore <PATH>
+```
+<PATH>には無視リストを設定するディレクトリを指定。
+
 ### 無視リスト（コマンド）
 ```bash
 $ svn propset svn:ignore -R *.class .
